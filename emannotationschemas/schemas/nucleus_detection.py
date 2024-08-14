@@ -23,3 +23,7 @@ class NucleusDetection(AnnotationSchema):
         required=False,
         description="high corner of the bounding box",
     )
+    
+class NucleusProperties(AnnotationSchema):
+    nucleolus = fields.Boolean(description="Presence of nucleolus")
+    other = fields.String(description="Other nucleus properties")

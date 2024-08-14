@@ -6,7 +6,6 @@ from emannotationschemas.schemas.base import (
     ReferenceAnnotation,
 )
 
-
 class BaseSynapseSchema(AnnotationSchema):
     pre_pt = mm.fields.Nested(
         BoundSpatialPoint,
@@ -36,12 +35,10 @@ class BaseSynapseSchema(AnnotationSchema):
             data.pop("valid", None)
         return data
 
-
 class NoCleftSynapse(BaseSynapseSchema):
     score = mm.fields.Float(
         description="synapse score (see table metadata for description of score)"
     )
-
 
 class SynapseSchema(BaseSynapseSchema):
     ctr_pt = mm.fields.Nested(
@@ -111,3 +108,8 @@ class Electrical(BaseSynapseSchema):
         description="The identification tag for gap junctions"
     )
         
+class SynapseSite(BaseSynapseSchema):
+    type = fields.String(description="Synapse site type")
+    class_label = fields.String(description="Class label")
+    neuron_id = fields.String(description="Neuron ID")
+    other = fields.String(description="Other synapse site information")
