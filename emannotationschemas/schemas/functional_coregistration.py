@@ -49,6 +49,17 @@ class FunctionalUnitCoregistrationExtended(ReferenceAnnotation):
         required=False, description="confidence score associated with match"
     )
 
+# Adding classes from https://github.com/aplbrain/BENCHMARK-Metadata/blob/1.1-and-1.2-annotation-metadata-for-review/annotation-metadata/CAVE-implemented-annotation-metadata-version-1.2.plantuml
+# With explanations from here: https://github.com/aplbrain/BENCHMARK-Metadata/blob/1.1-and-1.2-annotation-metadata-for-review/annotation-metadata/required-field-names.md
 
+class CoRegistration(ReferenceAnnotation):
+    valid = fields.Boolean(description="Indicates if the co-registration is valid")
+    pt = fields.Nested('PointSchema', description="Point schema for location data")
+    valid_id = fields.Float(description="Validation ID")
+    status_dendrite = fields.String(description="Status of the dendrite")
+    object_id = fields.String(description="Object ID for co-registration")
+    other = fields.String(description="Other co-registration-related information")
+
+# Moving this to the bottom/after BENCHMARK additions:
 class FunctionalUnitCoregistrationQC(ReferenceAnnotation):
     pass

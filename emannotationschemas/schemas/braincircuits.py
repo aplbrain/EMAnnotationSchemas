@@ -11,3 +11,9 @@ class BrainCircuitsBoundTagAnnotationUser(AnnotationSchema):
         required=True,
         description=f"User who created the tag.",
     )
+
+class RegionsOfInterest(AnnotationSchema):
+    layer = fields.Boolean(description="Layer regions")
+    brain_regions = fields.Boolean(description="Brain regions")
+    cylinder = fields.Boolean(description="Cylinder regions")
+    other = fields.String(description="Other regions of interest")

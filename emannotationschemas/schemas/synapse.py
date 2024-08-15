@@ -6,7 +6,6 @@ from emannotationschemas.schemas.base import (
     ReferenceAnnotation,
 )
 
-
 class BaseSynapseSchema(AnnotationSchema):
     pre_pt = mm.fields.Nested(
         BoundSpatialPoint,
@@ -36,12 +35,10 @@ class BaseSynapseSchema(AnnotationSchema):
             data.pop("valid", None)
         return data
 
-
 class NoCleftSynapse(BaseSynapseSchema):
     score = mm.fields.Float(
         description="synapse score (see table metadata for description of score)"
     )
-
 
 class SynapseSchema(BaseSynapseSchema):
     ctr_pt = mm.fields.Nested(
@@ -92,3 +89,27 @@ class ValidSynapse(ReferenceAnnotation):
         required=True,
         description="Valid annotation for synapses",
     )
+
+# Adding classes from https://github.com/aplbrain/BENCHMARK-Metadata/blob/1.1-and-1.2-annotation-metadata-for-review/annotation-metadata/CAVE-implemented-annotation-metadata-version-1.2.plantuml
+# With explanations from here: https://github.com/aplbrain/BENCHMARK-Metadata/blob/1.1-and-1.2-annotation-metadata-for-review/annotation-metadata/required-field-names.md
+class Chemical(BaseSynapseSchema):
+        presynaptic = mm.fields.Float(
+        description="Specialized sites that transmit signals between presynaptic neurons and their respective postsynaptic targets"
+    )
+        postsynaptic = mm.fields.Float(
+        description="Specialized sites that transmit signals between presynaptic neurons and their respective postsynaptic targets"
+    )
+        
+class Electrical(BaseSynapseSchema):
+        gap_junction_location = mm.fields.Float(
+        description="The location where channels that allow for cell to cell transfers between ions and small molecules"
+    )
+        gap_junction_id = mm.fields.Float(
+        description="The identification tag for gap junctions"
+    )
+        
+class SynapseSite(BaseSynapseSchema):
+    type = fields.String(description="Synapse site type")
+    class_label = fields.String(description="Class label")
+    neuron_id = fields.String(description="Neuron ID")
+    other = fields.String(description="Other synapse site information")
